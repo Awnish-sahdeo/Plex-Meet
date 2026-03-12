@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <rect width="48" height="48" rx="12" fill="#202124"/>
+  <!-- Camera body -->
+  <rect x="6" y="14" width="24" height="18" rx="4" fill="#4285f4"/>
+  <!-- Camera lens -->
+  <circle cx="18" cy="23" r="6" fill="#1a1a2e"/>
+  <circle cx="18" cy="23" r="3.5" fill="#4285f4" opacity="0.6"/>
+  <!-- Camera notch -->
+  <path d="M30 19l10-5v18l-10-5V19Z" fill="#34a853"/>
+  <!-- Record dot -->
+  <circle cx="40" cy="10" r="4" fill="#ea4335"/>
+</svg>

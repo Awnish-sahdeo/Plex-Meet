@@ -1,0 +1,34 @@
+services:
+  signaling-server:
+    build:
+      context: ./signaling-server
+      dockerfile: Dockerfile
+    container_name: meetstream-signaling
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+    environment:
+      - PORT=4000
+      - CLIENT_URL=http://localhost:3000
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:4000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: meetstream-client
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_SIGNALING_URL=http://localhost:4000
+    depends_on:
+      signaling-server:
+        condition: service_healthy
+
+# ml-interpreter-service is intentionally excluded from this compose file.
+# It is reserved for future ML model integration.
