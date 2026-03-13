@@ -19,7 +19,7 @@ io.on('connection', (socket) => {
 
   socket.on('join-room', ({ roomId, peerId }) => {
     // Kick existing sockets with same peerId in this room to prevent ghosts
-    const roomSockets = io.sockets.adapter.rooms.get(roomId);
+    let roomSockets = io.sockets.adapter.rooms.get(roomId);
     if (roomSockets) {
       for (const id of roomSockets) {
         const s = io.sockets.sockets.get(id);
@@ -37,7 +37,7 @@ io.on('connection', (socket) => {
     socket.displayName = `User ${socket.id.slice(0, 4)}`;
 
     const peers = [];
-    const roomSockets = io.sockets.adapter.rooms.get(roomId);
+    roomSockets = io.sockets.adapter.rooms.get(roomId);
     if (roomSockets) {
       for (const id of roomSockets) {
         if (id !== socket.id) {
